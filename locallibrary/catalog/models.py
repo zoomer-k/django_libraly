@@ -10,9 +10,10 @@ class Genre(models.Model):
     """Model representing a book genre."""
     # CharField 長さを指定するstrings
     # help_text 入力例などをHTMLのフォームに表示する。
-    name = models.CharField(max_length=200, help_text='Enter a book genre (e.g Science Fiction)')
-
-
+    name = models.CharField(
+        max_length=200, 
+        help_text='Enter a book genre (e.g Science Fiction)'
+        )
 
     # adminなどでクラスの中身を確認するために必要。
     def __str__(self):

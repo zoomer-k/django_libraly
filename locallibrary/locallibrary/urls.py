@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+
 urlpatterns = [
+    # '' URL pattern ほかのビューで動作しているときに注目する。
+    # view function  URLパターンが検出されたとき、呼び出される。
+    # name このパラメータで区別できる？(templateで使用)
+    
     path('admin/', admin.site.urls),
 ]
 
