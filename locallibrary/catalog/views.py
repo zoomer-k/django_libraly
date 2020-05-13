@@ -19,6 +19,10 @@ def index(request):
     # The 'all()' is implied by default.
     num_authors = Author.objects.count()
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     # SFを含む本の数
     num_genre_sf = Genre.objects.filter(name__exact='SF').count()
     context = {
@@ -27,6 +31,7 @@ def index(request):
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
         'num_genre_sf': num_genre_sf,
+        'num_visits': num_visits,
     }
     # HTMLページを生成して、responseとしてページを返す。
     # request HttpRequest
@@ -45,6 +50,7 @@ class BookDetailView(generic.DetailView):
 
 class AuthorListView(generic.ListView):
     model = Author
+    paginate_by = 2
 
 class AuthorDetailView(generic.DetailView):
     model = Author
