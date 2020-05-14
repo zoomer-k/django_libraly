@@ -17,26 +17,25 @@ from django.contrib import admin
 from django.urls import path
 
 
-
 urlpatterns = [
     # '' URL pattern ほかのビューで動作しているときに注目する。
     # view function  URLパターンが検出されたとき、呼び出される。
     # name このパラメータで区別できる？(templateで使用)
-    
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
-# Use include() to add paths from the catalog application 
+# Use include() to add paths from the catalog application
 from django.urls import include
 
 urlpatterns += [
-    path('catalog/', include('catalog.urls')),
+    path("catalog/", include("catalog.urls")),
 ]
 
-#Add URL maps to redirect the base URL to our application
+# Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView
+
 urlpatterns += [
-    path('', RedirectView.as_view(url='catalog/', permanent=True)),
+    path("", RedirectView.as_view(url="catalog/", permanent=True)),
 ]
 
 # Use static() to add url mapping to serve static files during development (only)
@@ -45,7 +44,6 @@ from django.conf.urls.static import static
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-#Add Django site authentication urls (for login, logout, password management)
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls'))
-]
+# Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [path("accounts/", include("django.contrib.auth.urls"))]
+
